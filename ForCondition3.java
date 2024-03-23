@@ -24,7 +24,6 @@ public class ForCondition3 {
             new BinaryOperator<Integer>() {
                 @Override
                 public Integer apply(Integer t, Integer u) {
-                    // TODO Auto-generated method stub
                     return t + u;
                 }
             });
