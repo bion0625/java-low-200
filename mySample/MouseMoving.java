@@ -2,9 +2,11 @@ package mySample;
 
 import java.awt.AWTException;
 import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.PointerInfo;
 import java.awt.Robot;
 import java.awt.event.InputEvent;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,6 +16,8 @@ public class MouseMoving {
         // x, y 좌표 + 초 (ex 3000 == 3초)
         mouseLocation(770, 440, 3000);
     }
+
+    public static int tCnt = 0; // 마우스 건드린 시점 트래킹
 
     public static void mouseMoveMecro(int x, int y) {
         try{
@@ -32,7 +36,16 @@ public class MouseMoving {
             @Override
             public void run() {
                 PointerInfo pt = MouseInfo.getPointerInfo();
-                System.out.println(pt.getLocation());
+                Point point = pt.getLocation();
+                if (tCnt == 0) {
+                    System.out.printf("\n%s\n", new Date().toString().substring(11, 19));
+                }
+                System.out.printf("[%d] %s\n", tCnt, point);
+                if (point.getX() == x && point.getY() == y) {
+                    tCnt++;
+                }else{
+                    tCnt = 0;
+                }
 
                 mouseMoveMecro(x, y);
             }
