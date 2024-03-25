@@ -12,10 +12,6 @@ import java.util.TimerTask;
 
 //마우스 매크로
 public class MouseMoving {
-    public static void main(String[] args) {
-        // x, y 좌표 + 초 (ex 3000 == 3초)
-        mouseLocation(770, 440, 60000);
-    }
 
     public static int tCnt = 0; // 마우스 건드린 시점 트래킹
 
@@ -49,5 +45,10 @@ public class MouseMoving {
             }
         };
         t.schedule(timerTask, 0, p);
+    }
+
+    public static void main(String[] args) {
+        // x, y 좌표 + 초 (ex 3000 == 3초)
+        mouseLocation(770, 440, 60000);
     }
 }
