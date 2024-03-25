@@ -16,6 +16,6 @@ public class StockModel {
     }
 
     public String getSavingText() {
-        return String.format("%s,%s,%s", name, code, isKospi ? "코스피" : "코스닥");
+        return String.format("%s/%s", code, isKospi ? "1" : "0");
     }
 }
