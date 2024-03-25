@@ -14,7 +14,7 @@ import java.util.TimerTask;
 public class MouseMoving {
     public static void main(String[] args) {
         // x, y 좌표 + 초 (ex 3000 == 3초)
-        mouseLocation(770, 440, 3000);
+        mouseLocation(770, 440, 60000);
     }
 
     public static int tCnt = 0; // 마우스 건드린 시점 트래킹
@@ -37,14 +37,12 @@ public class MouseMoving {
             public void run() {
                 PointerInfo pt = MouseInfo.getPointerInfo();
                 Point point = pt.getLocation();
-                if (tCnt == 0) {
-                    System.out.printf("\n%s\n", new Date().toString().substring(11, 19));
-                }
                 System.out.printf("[%d] %s\n", tCnt, point);
                 if (point.getX() == x && point.getY() == y) {
                     tCnt++;
                 }else{
                     tCnt = 0;
+                    System.out.printf("\t<%s>\n\n", new Date().toString().substring(11, 19));
                 }
 
                 mouseMoveMecro(x, y);
