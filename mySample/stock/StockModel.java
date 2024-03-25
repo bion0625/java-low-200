@@ -11,6 +11,10 @@ public class StockModel {
         this.isKospi = isKospi;
     }
 
+    public String getCode() {
+        return this.code;
+    }
+
     public String getSavingText() {
         return String.format("%s,%s,%s", name, code, isKospi ? "코스피" : "코스닥");
     }
