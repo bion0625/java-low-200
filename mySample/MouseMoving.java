@@ -41,7 +41,7 @@ public class MouseMoving {
                     System.out.printf("\t<%s>\n\n", new Date().toString().substring(11, 19));
                 }
 
-                mouseMoveMecro(x, y);
+                mouseMoveMecro(x, y); // 마우스 이동 및 클릭 -> 주석처리하면 좌표만 찍힘
             }
         };
         t.schedule(timerTask, 0, p);
