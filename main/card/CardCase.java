@@ -51,4 +51,12 @@ public class CardCase {
             }
         }
     }
+
+    public void sort(){
+        cards.sort(new CardComp());
+    }
+
+    public void rsort(){
+        cards.sort(new CardRomp());
+    }
 }
