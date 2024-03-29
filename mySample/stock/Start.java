@@ -26,6 +26,7 @@ public class Start {
         }
 
         // 52주 신고가 목록 보여주기
+        System.out.println();
         List<StockModel> kospiList = list.stream().filter(l -> l.getIsKospi()).collect(Collectors.toList());
         System.out.printf("코스피\t%d개\n", kospiList.size());
         for (StockModel stockModel : kospiList) {
@@ -33,7 +34,6 @@ public class Start {
         }
 
         System.out.println();
-
         List<StockModel> kosdaqList = list.stream().filter(l -> !l.getIsKospi()).collect(Collectors.toList());
         System.out.printf("코스닥\t%d개\n", kosdaqList.size());
         for (StockModel stockModel : kosdaqList) { // 52주 신고가 목록 보여주기
