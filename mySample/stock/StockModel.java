@@ -17,6 +17,14 @@ public class StockModel {
         this.isKospi = isKospi;
     }
 
+    public StockModel(String name, String code, boolean isKospi, int nowPrice, int newHighPrice) {
+        this.name = name;
+        this.code = code;
+        this.isKospi = isKospi;
+        this.nowPrice = nowPrice;
+        this.newHighPrice = newHighPrice;
+    }
+
     public void setCode(String code){
         this.code = code;
     }
@@ -26,7 +34,7 @@ public class StockModel {
     }
 
     public String getSavingText() {
-        return String.format("%s/%s", code, isKospi ? "1" : "0");
+        return String.format("%s/%s/nowPrice:%d/newHighPrice:%d", code, (isKospi ? "1" : "0"), nowPrice, newHighPrice);
     }
 
     public void setNewHighPrice(int newHighPrice){

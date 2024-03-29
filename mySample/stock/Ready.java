@@ -5,27 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ready {
-    public List<StockModel> getStockCode() {
+    public static String FILE_PATH = "mySample/stock/" + DayUtil.getTodayString();
+    String path = FILE_PATH;
 
+    public List<StockModel> getStocksFromWeb(){
+        List<StockModel> list = getStockCode();
+        return getNowPriceAndNewHighPrice(list);
+    }
+
+    private List<StockModel> getStockCode() {
+        StockRead readStock = new StockRead();
         List<StockModel> list = new ArrayList<>();
-
-        TextIo tio = new TextIo();
-        String path = "mySample/stock/" + DayUtil.getTodayString();
-        File f = new File(path);
-        if(!f.exists()) { // 해당 날짜의 파일이 이미 있으면 미생성
-            f.mkdirs();
-            StockRead readStock = new StockRead();
-            list = readStock.readNameAndCode(true);
-            list.addAll(readStock.readNameAndCode(false));
-
-            tio.saveCode(list, path);
-        }else{
-            list = tio.getCodeList(path);
-        }
+        list = readStock.readNameAndCode(true);
+        list.addAll(readStock.readNameAndCode(false));
         return list;
     }
 
-    public List<StockModel> getNowPriceAndNewHighPrice(List<StockModel> list){
+    private List<StockModel> getNowPriceAndNewHighPrice(List<StockModel> list){
         int count = 0;
         List<StockModel> priceList = new ArrayList<StockModel>();
         StockRead readStock = new StockRead();
@@ -35,9 +31,24 @@ public class Ready {
                 priceList.add(addModel);
             }
             count++;
-            System.out.println("성공:" + priceList.size() + " 실패" + (count - priceList.size()) + "/" + list.size());
+            if (count%10 == 0 || count == list.size()) {
+                System.out.printf("SUCCESS/FALE\t%d/%d\t%d\n", priceList.size(), + (count - priceList.size()), list.size());
+            }
         }
-
         return list;
+    }
+
+    public void saveStocks(List<StockModel> list){
+        TextIo tio = new TextIo();
+        File f = new File(path);
+        if(!f.exists()) { // 해당 날짜의 파일이 이미 있으면 미생성
+            f.mkdirs();
+            tio.saveCode(list, path);
+        }
+    }
+
+    public List<StockModel> getStocksFromText(){
+        TextIo tio = new TextIo();
+        return tio.getCodeList(path);
     }
 }
