@@ -43,6 +43,14 @@ public class StockRead {
         return list;
     }
 
+    public static void main(String[] args){
+        // TEST CODE
+        StockRead read = new StockRead();
+        StockModel modelSample = read.readNewHighPrice("005930");
+        modelSample.setIsKospi(true);
+        System.out.println(modelSample.getSavingText());
+    }
+
     public StockModel readNewHighPrice(String code){
 
         int newHighPrice = 0;
