@@ -5,10 +5,10 @@ import java.util.List;
 public class Start {
     public static void main(String[] args) {
         Ready ready = new Ready();
-        List<StockModel> list = ready.getStockCode();
+        List<StockModel> list = null;
+        list = ready.getStockCode();
+        list = ready.getNowPriceAndNewHighPrice(list);
 
-        // for (StockModel info : list) {
-        //     System.out.println(info.getCode());
-        // }
+        System.out.println(list);
     }
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public class Ready {
     public List<StockModel> getStockCode() {
+
         List<StockModel> list = new ArrayList<>();
 
         TextIo tio = new TextIo();
@@ -21,6 +22,22 @@ public class Ready {
         }else{
             list = tio.getCodeList(path);
         }
+        return list;
+    }
+
+    public List<StockModel> getNowPriceAndNewHighPrice(List<StockModel> list){
+        int count = 0;
+        List<StockModel> priceList = new ArrayList<StockModel>();
+        StockRead readStock = new StockRead();
+        for (StockModel stockModel : list) {
+            StockModel addModel = readStock.readNewHighPrice(stockModel.getCode());
+            if (addModel.getNowPrice() != 0 && addModel.getNewHighPrice() != 0) {
+                priceList.add(addModel);
+            }
+            count++;
+            System.out.println("성공:" + priceList.size() + " 실패" + (count - priceList.size()) + "/" + list.size());
+        }
+
         return list;
     }
 }
