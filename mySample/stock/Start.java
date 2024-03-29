@@ -19,8 +19,22 @@ public class Start {
 
         list = list.stream().filter(m -> m.getNowPrice()>=m.getNewHighPrice()).collect(Collectors.toList()); // 52주 신고가
 
-        for (StockModel stockModel : list) { // 52주 신고가 목록 보여주기
+        for (StockModel stockModel : list) {
             stockModel.setName(ready.getJustNameByCode(stockModel.getCode()));
+        }
+
+        // 52주 신고가 목록 보여주기
+        List<StockModel> kospiList = list.stream().filter(l -> l.getIsKospi()).collect(Collectors.toList());
+        System.out.printf("코스피\t%d\n", kospiList.size());
+        for (StockModel stockModel : kospiList) {
+            System.out.printf("%s\t%s개\n", stockModel.getCode(), stockModel.getName());
+        }
+
+        System.out.println();
+
+        List<StockModel> kosdaqList = list.stream().filter(l -> !l.getIsKospi()).collect(Collectors.toList());
+        System.out.printf("코스닥\t%d개\n", kosdaqList.size());
+        for (StockModel stockModel : kosdaqList) { // 52주 신고가 목록 보여주기
             System.out.printf("%s\t%s\n", stockModel.getCode(), stockModel.getName());
         }
     }
