@@ -10,7 +10,9 @@ public class Start {
         List<StockModel> list = null;
         File f = new File(ready.FILE_PATH);
         if(!f.exists()){
+            System.out.println("getStocksFromWeb start !!!");
             list = ready.getStocksFromWeb();
+            System.out.println("getStocksFromWeb end !!!");
 
             ready.saveStocks(list); // 저장
         }else{
