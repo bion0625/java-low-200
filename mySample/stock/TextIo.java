@@ -39,14 +39,14 @@ public class TextIo {
             String isKospi = codeStr.split("/")[1];
             int nowPrice = 0; 
             try{
-                nowPrice = Integer.valueOf(codeStr.split("/")[2].replace("nowPrice", ""));
+                nowPrice = Integer.valueOf(codeStr.split("/")[2].replace("nowPrice:", ""));
             }catch(Exception e){
                 nowPrice = 0;
                 e.printStackTrace();
             }
             int newHighPrice = 0;
             try{
-                newHighPrice = Integer.valueOf(codeStr.split("/")[2].replace("newHighPrice", ""));
+                newHighPrice = Integer.valueOf(codeStr.split("/")[3].replace("newHighPrice:", ""));
             }catch(Exception e){
                 newHighPrice = 0;
                 e.printStackTrace();

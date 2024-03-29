@@ -22,6 +22,7 @@ public class Ready {
     }
 
     private List<StockModel> getNowPriceAndNewHighPrice(List<StockModel> list){
+        int logPageSize = 50;
         int count = 0;
         List<StockModel> priceList = new ArrayList<StockModel>();
         StockRead readStock = new StockRead();
@@ -31,7 +32,7 @@ public class Ready {
                 priceList.add(addModel);
             }
             count++;
-            if (count%10 == 0 || count == list.size()) {
+            if (count%logPageSize == 0 || count >= (list.size()-1)) {
                 System.out.printf("SUCCESS/FALE\t%d/%d\t%d/%d\n", priceList.size(), + (count - priceList.size()), count, list.size());
             }
         }
