@@ -51,18 +51,19 @@ public class TextIo {
 
         String[] codeStringList = codeString.split(",");
         for (String codeStr : codeStringList) {
-            String code = codeStr.split("/")[0];
-            String isKospi = codeStr.split("/")[1];
+            String[] str = codeStr.split("/");
+            String code = str[0];
+            String isKospi = str[1];
             int nowPrice = 0; 
             try{
-                nowPrice = Integer.valueOf(codeStr.split("/")[2].replace("nowPrice:", ""));
+                nowPrice = Integer.valueOf(str[2].replace("nowPrice:", ""));
             }catch(Exception e){
                 nowPrice = 0;
                 e.printStackTrace();
             }
             int newHighPrice = 0;
             try{
-                newHighPrice = Integer.valueOf(codeStr.split("/")[3].replace("newHighPrice:", ""));
+                newHighPrice = Integer.valueOf(str[3].replace("newHighPrice:", ""));
             }catch(Exception e){
                 newHighPrice = 0;
                 e.printStackTrace();

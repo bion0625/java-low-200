@@ -46,7 +46,7 @@ public class StockRead {
     public static void main(String[] args){
         // TEST CODE
         StockRead read = new StockRead();
-        StockModel modelSample = read.readNewHighPrice("005930");
+        StockModel modelSample = read.readNewHighPrice("000215");
         modelSample.setIsKospi(true);
         System.out.println(modelSample.getSavingText());
     }
@@ -80,15 +80,15 @@ public class StockRead {
         StockModel stockModel = new StockModel(code);
 
         for (int i = 0; i < htmls.size(); i++) {
-            if(htmls.get(i).contains("<span>현재가</span>")){
+            if(htmls.get(i).contains("전일대비 상승")){
                 for (int j = i; j < htmls.size(); j++) {
-                    if (htmls.get(j).contains("<td>")) {
+                    if (htmls.get(j).contains("현재가")) {
                         try{
                             nowPrice = Integer.valueOf(
                                 htmls.get(j)
-                                    .replace("<td>", "")
-                                    .replace("</td>", "")
-                                    .replace(",", "")
+                                    .substring("<dd>현재가".length(), htmls.get(j).indexOf("전일대비"))
+                                    .replaceAll(",", "")
+                                    .trim()
                                 );
                         }catch(Exception e){
                             System.out.println("nowPrice error !!!, code: " + code);

@@ -2,6 +2,7 @@ package mySample.stock;
 
 import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Start {
     public static void main(String[] args) {
@@ -16,6 +17,10 @@ public class Start {
             list = ready.getStocksFromText(); // 이미 저장되어 있으면 불러오기
         }
 
-        System.out.println(list);
+        list = list.stream().filter(m -> m.getNowPrice()>=m.getNewHighPrice()).collect(Collectors.toList());
+
+        for (StockModel stockModel : list) {
+            System.out.println(stockModel.getSavingText());
+        }
     }
 }

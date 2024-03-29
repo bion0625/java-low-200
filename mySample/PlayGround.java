@@ -5,30 +5,10 @@ import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-public class PlayGround extends JFrame {
-    //생성자
-   public PlayGround() {
-      setSize(800, 500);
-      setLocation(100, 100);
-      setDefaultCloseOperation(EXIT_ON_CLOSE);
-      
-      //FlowLayout 객체 전달하기
-      setLayout(new FlowLayout(FlowLayout.LEFT));
-      //버튼을 만들어서 
-      JButton btn1=new JButton("버튼1");
-      JButton btn2=new JButton("버튼2");
-      JButton btn3=new JButton("버튼3");
-      
-      //프레임에 추가하기 
-      add(btn1);
-      add(btn2);
-      add(btn3);
-      
-      setVisible(true);
-   }
-   
-   //run 했을때 실행순서가 시작되는 main 메소드 
+public class PlayGround {
    public static void main(String[] args) {
-      new PlayGround();
+      String str = "<dd>현재가 26,650 전일대비 상승 250 플러스 0.95 퍼센트</dd>";
+      str = str.substring("<dd>현재가".length(), str.indexOf("전일대비")).replaceAll(",", "").trim();
+      System.out.println(str);
    }
 }
