@@ -32,7 +32,7 @@ public class Ready {
             }
             count++;
             if (count%10 == 0 || count == list.size()) {
-                System.out.printf("SUCCESS/FALE\t%d/%d\t%d\n", priceList.size(), + (count - priceList.size()), list.size());
+                System.out.printf("SUCCESS/FALE\t%d/%d\t%d/%d\n", priceList.size(), + (count - priceList.size()), count, list.size());
             }
         }
         return list;
