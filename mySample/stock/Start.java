@@ -7,8 +7,6 @@ public class Start {
     public static void main(String[] args) {
         Ready ready = new Ready();
         List<StockModel> list = null;
-
-        
         File f = new File(ready.FILE_PATH);
         if(!f.exists()){
             list = ready.getStocksFromWeb();

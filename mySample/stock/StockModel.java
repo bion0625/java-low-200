@@ -29,6 +29,10 @@ public class StockModel {
         this.isKospi = isKospi;
     }
 
+    public boolean getIsKospi(){
+        return this.isKospi;
+    }
+
     public void setCode(String code){
         this.code = code;
     }

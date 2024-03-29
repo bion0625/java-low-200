@@ -29,14 +29,15 @@ public class Ready {
         for (StockModel stockModel : list) {
             StockModel addModel = readStock.readNewHighPrice(stockModel.getCode());
             if (addModel.getNowPrice() != 0 && addModel.getNewHighPrice() != 0) {
+                addModel.setIsKospi(stockModel.getIsKospi());
                 priceList.add(addModel);
             }
             count++;
-            if (count%logPageSize == 0 || count >= (list.size()-1)) {
+            if (count%logPageSize == 0 || count == (list.size()-1)) {
                 System.out.printf("SUCCESS/FALE\t%d/%d\t%d/%d\n", priceList.size(), + (count - priceList.size()), count, list.size());
             }
         }
-        return list;
+        return priceList;
     }
 
     public void saveStocks(List<StockModel> list){
