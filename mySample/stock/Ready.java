@@ -8,6 +8,11 @@ public class Ready {
     public static String FILE_PATH = "mySample/stock/" + DayUtil.getTodayString();
     String path = FILE_PATH;
 
+    public String getJustNameByCode(String code){
+        StockRead readStock = new StockRead();
+        return readStock.readJustNameByCode(code);
+    }
+
     public List<StockModel> getStocksFromWeb(){
         List<StockModel> list = getStockCode();
         return getNowPriceAndNewHighPrice(list);

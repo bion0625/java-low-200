@@ -25,6 +25,10 @@ public class StockModel {
         this.newHighPrice = newHighPrice;
     }
 
+    public void setName(String name){
+        this.name = name;
+    }
+
     public void setIsKospi(boolean isKospi){
         this.isKospi = isKospi;
     }

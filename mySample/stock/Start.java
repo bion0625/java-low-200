@@ -20,7 +20,9 @@ public class Start {
         list = list.stream().filter(m -> m.getNowPrice()>=m.getNewHighPrice()).collect(Collectors.toList());
 
         for (StockModel stockModel : list) {
-            System.out.println(stockModel.getSavingText());
+            String name = ready.getJustNameByCode(stockModel.getCode());
+            stockModel.setName(name);
+            System.out.println(name);
         }
     }
 }

@@ -43,14 +43,6 @@ public class StockRead {
         return list;
     }
 
-    public static void main(String[] args){
-        // TEST CODE
-        StockRead read = new StockRead();
-        StockModel modelSample = read.readNewHighPrice("000215");
-        modelSample.setIsKospi(true);
-        System.out.println(modelSample.getSavingText());
-    }
-
     public StockModel readNewHighPrice(String code){
 
         int newHighPrice = 0;
@@ -125,5 +117,48 @@ public class StockRead {
         stockModel.setNewHighPrice(newHighPrice);
 
         return stockModel;
+    }
+
+    public static void main(String[] args){
+        // TEST CODE
+        StockRead read = new StockRead();
+        read.readJustNameByCode("003160");
+    }
+
+    public String readJustNameByCode(String code){
+        String name = "";
+        ArrayList<String> htmls = new ArrayList<>();
+        String newUrls = "https://finance.naver.com/item/sise.naver?code=" + code;
+
+        URL url = null;
+        try{
+            url = new URL(newUrls);
+
+            BufferedReader reader = new BufferedReader(
+                new InputStreamReader(url.openStream(), "euc-kr"),
+                8
+            );
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                if (!line.trim().equals("")) {
+                    htmls.add(line.trim());
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        ArrayList<StockModel> list = new ArrayList<>();
+        for (String html : htmls) {
+            if(html.contains("class=\"wrap_company\"")){
+                for (int i = htmls.indexOf(html); i < htmls.size(); i++) {
+                    if (htmls.get(i).contains("<a")) {
+                        name = htmls.get(i).substring(htmls.get(i).indexOf("\">") + "\">".length(), htmls.get(i).indexOf("</")).trim();
+                        break;
+                    }
+                }
+            }
+        }
+        return name;
     }
 }
