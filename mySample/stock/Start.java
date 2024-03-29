@@ -20,8 +20,7 @@ public class Start {
         list = list.stream().filter(m -> m.getNowPrice()>=m.getNewHighPrice()).collect(Collectors.toList()); // 52주 신고가
 
         for (StockModel stockModel : list) { // 52주 신고가 목록 보여주기
-            String name = ready.getJustNameByCode(stockModel.getCode());
-            stockModel.setName(name);
+            stockModel.setName(ready.getJustNameByCode(stockModel.getCode()));
             System.out.printf("%s\t%s\n", stockModel.getCode(), stockModel.getName());
         }
     }
