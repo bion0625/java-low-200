@@ -25,7 +25,7 @@ public class Start {
             stockModel.setName(ready.getJustNameByCode(stockModel.getCode()));
         }
 
-        // 52주 신고가 목록 보여주기
+        // 목록 보여주기
         System.out.println();
         List<StockModel> kospiList = list.stream().filter(l -> l.getIsKospi()).collect(Collectors.toList());
         System.out.printf("코스피\t%d개\n", kospiList.size());
