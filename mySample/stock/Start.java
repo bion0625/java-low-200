@@ -39,5 +39,10 @@ public class Start {
         for (StockModel stockModel : kosdaqList) { // 52주 신고가 목록 보여주기
             System.out.printf("%s\t%s\n", stockModel.getCode(), stockModel.getName());
         }
+
+        /*
+         * 라이브러리
+         * https://github.com/devngho/kt_kisopenapi?tab=readme-ov-file
+        */
     }
 }
