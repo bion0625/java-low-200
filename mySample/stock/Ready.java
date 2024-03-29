@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ready {
-    public static String FILE_PATH = "mySample/stock/" + DayUtil.getTodayString();
+    public static String FILE_PATH = "mySample/stock/save/" + DayUtil.getTodayString();
     String path = FILE_PATH;
 
     public String getJustNameByCode(String code){
@@ -15,6 +15,7 @@ public class Ready {
 
     public List<StockModel> getStocksFromWeb(){
         List<StockModel> list = getStockCode();
+        // list = list.subList(0, 100); // todo del: 테스트 할 적에 갯수 제한
         return getNowPriceAndNewHighPrice(list);
     }
 
@@ -30,18 +31,28 @@ public class Ready {
         int logPageSize = 50;
         int count = 0;
         List<StockModel> priceList = new ArrayList<StockModel>();
+        List<StockModel> failList = new ArrayList<StockModel>();
         StockRead readStock = new StockRead();
         for (StockModel stockModel : list) {
             StockModel addModel = readStock.readNewHighPrice(stockModel.getCode());
             if (addModel.getNowPrice() != 0 && addModel.getNewHighPrice() != 0) {
                 addModel.setIsKospi(stockModel.getIsKospi());
                 priceList.add(addModel);
+            } else {
+                failList.add(addModel);
             }
             count++;
-            if (count%logPageSize == 0 || count == (list.size()-1)) {
+            if (count%logPageSize == 0 || count == list.size()) {
                 System.out.printf("SUCCESS/FALE\t%d/%d\t%d/%d\n", priceList.size(), + (count - priceList.size()), count, list.size());
             }
         }
+        System.out.println();
+        System.out.println("-----FAIL-----");
+        for (StockModel stockModel : failList) {
+            System.out.printf("%s\t%s\n", stockModel.getCode(), readStock.readJustNameByCode(stockModel.getCode()));
+        }
+        System.out.println("----------");
+        System.out.println();
         return priceList;
     }
 

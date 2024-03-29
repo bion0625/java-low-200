@@ -6,28 +6,21 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class StockRead {
+
+    public static void main(String[] args){
+        // TEST CODE
+        StockRead read = new StockRead();
+        ArrayList<StockModel> list = read.readNameAndCode(true);
+        for (StockModel stockModel : list) {
+            System.out.println(stockModel.getSavingText());
+        }
+    }
+
     public ArrayList<StockModel> readNameAndCode(boolean isKospi) {
 
-        ArrayList<String> htmls = new ArrayList<>();
         String newUrls = "https://finance.naver.com/sise/sise_rise.naver?" + (isKospi ? "" : "sosok=1");
 
-        URL url = null;
-        try{
-            url = new URL(newUrls);
-
-            BufferedReader reader = new BufferedReader(
-                new InputStreamReader(url.openStream(), "euc-kr"),
-                8
-            );
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                if (!line.trim().equals("")) {
-                    htmls.add(line.trim());
-                }
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        ArrayList<String> htmls = getHtmlsByUrl(newUrls);
 
         ArrayList<StockModel> list = new ArrayList<>();
         for (String html : htmls) {
@@ -48,26 +41,9 @@ public class StockRead {
         int newHighPrice = 0;
         int nowPrice = 0;
 
-        ArrayList<String> htmls = new ArrayList<>();
         String newUrls = "https://finance.naver.com/item/main.naver?code=" + code;
 
-        URL url = null;
-        try{
-            url = new URL(newUrls);
-
-            BufferedReader reader = new BufferedReader(
-                new InputStreamReader(url.openStream(), "euc-kr"),
-                8
-            );
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                if (!line.trim().equals("")) {
-                    htmls.add(line.trim());
-                }
-            }
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        ArrayList<String> htmls = getHtmlsByUrl(newUrls);
         
         StockModel stockModel = new StockModel(code);
 
@@ -119,17 +95,28 @@ public class StockRead {
         return stockModel;
     }
 
-    public static void main(String[] args){
-        // TEST CODE
-        StockRead read = new StockRead();
-        read.readJustNameByCode("003160");
-    }
-
     public String readJustNameByCode(String code){
         String name = "";
-        ArrayList<String> htmls = new ArrayList<>();
+        
         String newUrls = "https://finance.naver.com/item/sise.naver?code=" + code;
 
+        ArrayList<String> htmls = getHtmlsByUrl(newUrls);
+
+        for (String html : htmls) {
+            if(html.contains("class=\"wrap_company\"")){
+                for (int i = htmls.indexOf(html); i < htmls.size(); i++) {
+                    if (htmls.get(i).contains("<a")) {
+                        name = htmls.get(i).substring(htmls.get(i).indexOf("\">") + "\">".length(), htmls.get(i).indexOf("</")).trim();
+                        break;
+                    }
+                }
+            }
+        }
+        return name;
+    }
+
+    private ArrayList<String> getHtmlsByUrl(String newUrls){
+        ArrayList<String> htmls = new ArrayList<>();
         URL url = null;
         try{
             url = new URL(newUrls);
@@ -148,17 +135,6 @@ public class StockRead {
             e.printStackTrace();
         }
 
-        ArrayList<StockModel> list = new ArrayList<>();
-        for (String html : htmls) {
-            if(html.contains("class=\"wrap_company\"")){
-                for (int i = htmls.indexOf(html); i < htmls.size(); i++) {
-                    if (htmls.get(i).contains("<a")) {
-                        name = htmls.get(i).substring(htmls.get(i).indexOf("\">") + "\">".length(), htmls.get(i).indexOf("</")).trim();
-                        break;
-                    }
-                }
-            }
-        }
-        return name;
+        return htmls;
     }
 }
