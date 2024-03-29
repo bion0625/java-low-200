@@ -17,7 +17,7 @@ public class Start {
             list = ready.getStocksFromText(); // 이미 저장되어 있으면 불러오기
         }
 
-        list = list.stream().filter(m -> m.getNowPrice()>=m.getNewHighPrice()).collect(Collectors.toList());
+        list = list.stream().filter(m -> m.getNowPrice()>=m.getNewHighPrice()).collect(Collectors.toList()); // 52주 신고가
 
         for (StockModel stockModel : list) {
             String name = ready.getJustNameByCode(stockModel.getCode());
