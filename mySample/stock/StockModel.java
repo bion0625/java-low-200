@@ -29,6 +29,10 @@ public class StockModel {
         this.name = name;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public void setIsKospi(boolean isKospi){
         this.isKospi = isKospi;
     }
