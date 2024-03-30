@@ -1,4 +1,4 @@
-package main.card.sutda;
+package main.card.sutdaGame;
 
 import main.card.Card4;
 
