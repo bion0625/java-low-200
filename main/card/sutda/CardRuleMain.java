@@ -1,4 +1,4 @@
-package main.card.섯다;
+package main.card.sutda;
 
 import main.card.CardCase3;
 
