@@ -74,6 +74,8 @@ public class CardRule {
                 }else if ((toV(c1) * toV(c2) == 40) && (toV(c1) + toV(c2) == 14)){ // 4 10
                     count = 95;
                 }else if ((toV(c1) * toV(c2) == 24) && (toV(c1) + toV(c2) == 10)){ // 4 6
+                    count = 94;
+                } else { // 끗
                     count = ((toV(c1) + toV(c2))%10) * 10;
                 }
             }
