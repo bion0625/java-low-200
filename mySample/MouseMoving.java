@@ -49,6 +49,6 @@ public class MouseMoving {
 
     public static void main(String[] args) {
         // x, y 좌표 + 초 (ex 3000 == 3초)
-        mouseLocation(770, 440, 60000);
+        mouseLocation(770, 440, 180000);
     }
 }
