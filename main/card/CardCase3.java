@@ -11,7 +11,7 @@ public class CardCase3 {
         cards.clear(); // 내용 지우기
     }
     // List 반환
-    public List<Card4> getCard4s(){
+    public List<Card4> getCards(){
         return cards;
     }
     // List에 저장된 Card의 개수
