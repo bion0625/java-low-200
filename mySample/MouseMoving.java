@@ -33,7 +33,7 @@ public class MouseMoving {
             public void run() {
                 PointerInfo pt = MouseInfo.getPointerInfo();
                 Point point = pt.getLocation();
-                System.out.printf("[%d] %s\n", tCnt, point);
+                System.out.printf("[%d] %s\n", (tCnt * (p/60000)), point);
                 if (point.getX() == x && point.getY() == y) {
                     tCnt++;
                 }else{
