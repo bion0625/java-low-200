@@ -63,6 +63,7 @@ public class BakaraMain {
 
                 if (sum <= 0) {
                     System.out.println("자산이 부족합니다. 수고하셨습니다.");
+                    in.close();
                     break;
                 }
             }
