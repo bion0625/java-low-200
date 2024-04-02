@@ -2,7 +2,6 @@ package main.card.bakaraGame;
 
 import main.card.Card4;
 import main.card.CardCase3;
-import main.card.sutdaGame.CardRule;
 
 public class CardPrint {
     CardCase3 cc = new CardCase3();
@@ -49,6 +48,9 @@ public class CardPrint {
             System.out.println("3번째 카드를 받습니다!");
             System.out.println("3번째 카드: " + cc.getCards().get(4));
             System.out.println("3번째 카드 수: " + num(4));
+            System.out.println("----------");
+            System.out.println("플레이어의 총 카드합: " + total(sumP(), num(4)));
+            TotalPlayer = total(sumP(), num(4));
         }
         System.out.println("----------");
         System.out.println();
