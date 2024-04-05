@@ -1,19 +1,18 @@
 package mySample.stock;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class ThreeDayCheck {
+public class PriceAndVolumCheck {
     public static void main(String[] args) {
         
-        ThreeDayCheck check = new ThreeDayCheck();
+        PriceAndVolumCheck check = new PriceAndVolumCheck();
 
-        System.out.println("threeDayHighChain:" + check.tenDayVolumCheck("005930"));
+        System.out.println("nowHighSize:" + check.nowHighSize("440640"));
     }
 
     public boolean threeDayPriceAndVolumCheck(String stockCode) {
@@ -94,5 +93,41 @@ public class ThreeDayCheck {
         }
 
         return tenDayVolumCheck;
+    }
+
+    public boolean nowHighSize(String stockCode) {
+        boolean isBetween5and15 = false;
+
+        String url = "http://finance.naver.com/item/sise_day.nhn?code=" + stockCode;
+
+        ArrayList<Double> closePrices = new ArrayList<>();
+
+        try {
+            Document doc = Jsoup.connect(url).get();
+            Elements rows= doc.select("table.type2 tr");
+
+            for (int i = 2; i < 4; i++) { // 오늘과 어제 종가 데이터 가져옴
+                Element row = rows.get(i);
+                Elements cols = row.select("td");
+
+                String date = cols.get(0).text();
+                double closePrice = Double.parseDouble(cols.get(1).text().replace(",", ""));
+
+                closePrices.add(closePrice);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (closePrices.get(0) <= closePrices.get(1)) { // 오늘 종가(or 현재가)가 어제 종가보다 낮거나 같으면 false 리턴
+        } else {
+            double highSize = ((closePrices.get(0) - closePrices.get(1)) / closePrices.get(0)) * 100; // 백분율로 계산
+            if (highSize >= 5 && highSize <= 15) { // 오늘 종가(or 현재가)가 어제보다 오른 정도가 5%이상 15% 이하일 때 true 리턴
+                isBetween5and15 = true;
+            }
+        }
+
+        return isBetween5and15;
     }
 }

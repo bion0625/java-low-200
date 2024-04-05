@@ -34,44 +34,63 @@ public class Start {
 
         for (StockModel stockModel : list) {
             stockModel.setName(ready.getJustNameByCode(stockModel.getCode()));
-            System.out.printf("get name count :%s\t%d\t/\t%d\n", stockModel.getCode(), list.indexOf(stockModel), list.size());
+            System.out.printf("get name count :\t%s\t%d\t/\t%d\n", stockModel.getCode(), list.indexOf(stockModel) + 1, list.size());
         }
 
         System.out.println("get name end !");
 
-        ThreeDayCheck check = new ThreeDayCheck();
+        System.out.println("check stock by name start !");
 
-        System.out.println("check three day price & ten day volum start !");
+        list = list.stream().filter( // 증권 아닌 종목 필터
+            l -> 
+            !l.getName().contains("선물") 
+            && !l.getName().contains("금리") 
+            && !l.getName().contains("채권") 
+            && !l.getName().contains("KODEX")
+            && !l.getName().contains("레버리지")
+            && !l.getName().contains("인버스")
+            && !l.getName().contains("TIGER")
+            && !l.getName().contains("회사채")
+            && !l.getName().contains("금융채")
+            && !l.getName().contains("KBSTAR")
+        )
+        .collect(Collectors.toList());
+
+        System.out.println("check stock by name end !");
+
+        PriceAndVolumCheck check = new PriceAndVolumCheck();
+
+        System.out.println("check three day price & ten day volum & nowHighSize start !");
         
-        // 목록 보여주기
+
         final List<StockModel> countList = list;
+
+        list = list.stream().filter(l -> {
+
+            boolean isOk = 
+            check.threeDayPriceAndVolumCheck(l.getSixCode()) // 오늘 미포함 최근 3일 연달아 상승(고가 저가 둘 다)
+            && check.tenDayVolumCheck(l.getSixCode()) // 거래량이 최근 10일 중 오늘이 최대가 아니어야 함
+            && check.nowHighSize(l.getSixCode()); // 어제 종가대비 오늘 종가(or 현재가) 상승률이 5%이상 15%미만이어야 함
+
+            System.out.printf("check complete: %d/%d\n", countList.indexOf(l) + 1, countList.size());
+            return isOk;
+        })
+        .collect(Collectors.toList()); 
+
+        System.out.println("check three day price & ten day volum & nowHighSize end !");
+
+        // 목록 보여주기
         System.out.println();
         List<StockModel> kospiList = list.stream()
-            .filter(
-                l -> {
-                    System.out.printf("KOSPI: %d/%d\n", countList.indexOf(l), countList.size());
-                    return 
-                    l.getIsKospi() // 코스피
-                    && check.threeDayPriceAndVolumCheck(l.getSixCode()) // 오늘 미포함 최근 3일 연달아 상승(고가 저가 둘 다)
-                    && check.tenDayVolumCheck(l.getSixCode()); // 거래량이 최근 10일 중 오늘이 최대가 아니어야 함
-                }
-            )
+            .filter(l -> l.getIsKospi())
             .collect(Collectors.toList());        
 
         System.out.println();
         List<StockModel> kosdaqList = list.stream()
-            .filter(
-                l -> {
-                    System.out.printf("KOSDAQ: %d/%d\n", countList.indexOf(l), countList.size());
-                    return 
-                    !l.getIsKospi() // 코스닥
-                    && check.threeDayPriceAndVolumCheck(l.getSixCode()) // 오늘 미포함 최근 3일 연달아 상승(고가 저가 둘 다)
-                    && check.tenDayVolumCheck(l.getSixCode()); // 거래량이 최근 10일 중 오늘이 최대가 아니어야 함
-                }
-            )
+            .filter(l -> !l.getIsKospi())
             .collect(Collectors.toList());
 
-        System.out.println("check three day price & ten day volum end !");
+        
 
         System.out.printf("코스피\t%d개\n", kospiList.size());
         for (StockModel stockModel : kospiList) {
