@@ -122,7 +122,7 @@ public class PriceAndVolumCheck {
 
         if (closePrices.get(0) <= closePrices.get(1)) { // 오늘 종가(or 현재가)가 어제 종가보다 낮거나 같으면 false 리턴
         } else {
-            double highSize = ((closePrices.get(0) - closePrices.get(1)) / closePrices.get(0)) * 100; // 백분율로 계산
+            double highSize = ((closePrices.get(0) - closePrices.get(1)) / closePrices.get(1)) * 100; // 백분율로 계산
             if (highSize >= 5 && highSize <= 15) { // 오늘 종가(or 현재가)가 어제보다 오른 정도가 5%이상 15% 이하일 때 true 리턴
                 isBetween5and15 = true;
             }
