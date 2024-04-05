@@ -49,6 +49,16 @@ public class StockModel {
         return this.code;
     }
 
+    public String getSixCode() {
+        String plusZero = "";
+        if (this.code.length() < 6) {
+            for (int i = 0; i < 6-this.code.length(); i++) {
+                plusZero += "0";
+            }
+        }
+        return plusZero + this.code;
+    }
+
     public String getSavingText() {
         return String.format("%s/%s/nowPrice:%d/newHighPrice:%d", code, (isKospi ? "1" : "0"), nowPrice, newHighPrice);
     }
