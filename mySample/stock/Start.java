@@ -79,7 +79,7 @@ public class Start {
 
         System.out.println("check three day price & ten day volum & nowHighSize end !");
 
-        // 목록 보여주기
+        // 목록 구분
         System.out.println();
         List<StockModel> kospiList = list.stream()
             .filter(l -> l.getIsKospi())
@@ -90,8 +90,7 @@ public class Start {
             .filter(l -> !l.getIsKospi())
             .collect(Collectors.toList());
 
-        
-
+        // 목록 보여주기
         System.out.printf("코스피\t%d개\n", kospiList.size());
         for (StockModel stockModel : kospiList) {
             System.out.printf("%s\t%s\n", stockModel.getCode(), stockModel.getName());
