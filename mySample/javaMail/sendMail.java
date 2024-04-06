@@ -12,10 +12,10 @@ public class sendMail {
          * 메일설정 > POP3/IMAP 설정 > IMAP/SMTP 설정: IMAP/SMTP 설정 사용함 [check]
         */
 
-        String from = "아이디@naver.com"; // 보내는 사람의 이메일 주소
-        String password = "비밀번호"; // 보내는 사람의 이메일 계정 비밀번호
-        String to = "받는분@gmail.com"; // 받는 사람의 이메일 주소
-        String host = "smtp.naver.com"; // 구글 메일 서버 호스트 이름
+        String from = "@gmail.com"; // 보내는 사람의 이메일 주소
+        String password = ""; // 보내는 사람의 이메일 계정 비밀번호
+        String to = "@gmail.com"; // 받는 사람의 이메일 주소
+        String host = "smtp.gmail.com"; // 구글 메일 서버 호스트 이름
 
         // SMTP 프로토콜 설정
         Properties props = new Properties();
