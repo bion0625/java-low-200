@@ -114,9 +114,13 @@ public class Start {
             System.out.print(content);
             msg += content;
         }
+
+        System.out.println();
+        msg += "\n";
+
         String kosdaqTitle = String.format("코스닥\t%d개\n", kosdaqList.size());
         System.out.print(kosdaqTitle);
-        msg += kospiTitle;
+        msg += kosdaqTitle;
         for (StockModel stockModel : kosdaqList) {
             String content = String.format("%s\t%s\n", stockModel.getCode(), stockModel.getName());
             System.out.print(content);
