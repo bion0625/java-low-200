@@ -1,11 +1,24 @@
 package mySample.stock;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Start {
     public static void main(String[] args) {
+
+        Scanner scann = new Scanner(System.in);
+
+        System.out.println("\nwrite app password");
+
+        String password = scann.nextLine();
+
+        if (password.trim() == "" || password == null) {
+            System.out.println("need app password");
+        }
+
         Ready ready = new Ready();
         List<StockModel> list = null;
         File f = new File(ready.FILE_PATH);
@@ -90,14 +103,39 @@ public class Start {
             .filter(l -> !l.getIsKospi())
             .collect(Collectors.toList());
 
+        String msg = "";
+
         // 목록 보여주기
-        System.out.printf("코스피\t%d개\n", kospiList.size());
+        String kospiTitle = String.format("코스피\t%d개\n", kospiList.size());
+        System.out.print(kospiTitle);
+        msg += kospiTitle;
         for (StockModel stockModel : kospiList) {
-            System.out.printf("%s\t%s\n", stockModel.getCode(), stockModel.getName());
+            String content = String.format("%s\t%s\n", stockModel.getCode(), stockModel.getName());
+            System.out.print(content);
+            msg += content;
         }
-        System.out.printf("코스닥\t%d개\n", kosdaqList.size());
+        String kosdaqTitle = String.format("코스닥\t%d개\n", kosdaqList.size());
+        System.out.print(kosdaqTitle);
+        msg += kospiTitle;
         for (StockModel stockModel : kosdaqList) {
-            System.out.printf("%s\t%s\n", stockModel.getCode(), stockModel.getName());
+            String content = String.format("%s\t%s\n", stockModel.getCode(), stockModel.getName());
+            System.out.print(content);
+            msg += content;
         }
+
+        SendMail sendMail = new SendMail();
+        try {
+            sendMail.sendMailByGoogle(
+                "tempbion@gmail.com", 
+                password, 
+                "stxtory@gmail.com", 
+                new Date() + " - 종목", 
+                msg
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        scann.close();
     }
 }
