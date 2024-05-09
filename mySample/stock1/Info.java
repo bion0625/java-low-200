@@ -22,13 +22,17 @@ public class Info {
         info.getPriceTotalPage("439250");
     }
 
-    public List<Stock> getCompanyInfo() throws IOException { // 기본정보 가져오기
+    public List<Stock> getCompanyInfo() { // 기본정보 가져오기
         List<Stock> stocks = new ArrayList<>();
-
-        Document doc = Jsoup.connect("http://kind.krx.co.kr/corpgeneral/corpList.do?method=download&searchType=13")
-                            .userAgent("Mozilla/5.0")
-                            .ignoreContentType(true)
-                            .get();
+        Document doc = null;
+        try {
+            doc = Jsoup.connect("http://kind.krx.co.kr/corpgeneral/corpList.do?method=download&searchType=13")
+                                .userAgent("Mozilla/5.0")
+                                .ignoreContentType(true)
+                                .get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Elements infoList = doc.select("tr");
         for (int i = 1; i < infoList.size(); i++) {
             Elements info = infoList.get(i).select("td");
@@ -41,11 +45,16 @@ public class Info {
         return stocks;
     }
 
-    public List<Price> getPriceInfo(String code, int page) throws IOException { // 종목 및 페이지로 가격 정보 가져오기
-        Document doc = Jsoup.connect(String.format("http://finance.naver.com/item/sise_day.nhn?code=%s&page=%d", code, page))
-                            .userAgent("Mozilla/5.0")
-                            .ignoreContentType(true)
-                            .get();
+    public List<Price> getPriceInfo(String code, int page) { // 종목 및 페이지로 가격 정보 가져오기
+        Document doc = null;
+        try {
+            doc = Jsoup.connect(String.format("http://finance.naver.com/item/sise_day.nhn?code=%s&page=%d", code, page))
+                                .userAgent("Mozilla/5.0")
+                                .ignoreContentType(true)
+                                .get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Elements infoList = doc.select("tr");
 
@@ -62,6 +71,8 @@ public class Info {
             price.setDate(formatUtil.stringToDate(info.get(0).text()));
             price.setClose(formatUtil.stringToLong(info.get(1).text()));
             price.setDiff(formatUtil.stringToLong(info.get(2).text()
+                                    .replaceAll("상한가","")
+                                    .replaceAll("하한가","")
                                     .replaceAll("상승","")
                                     .replaceAll("하락","")
                                     .replaceAll("보합","")

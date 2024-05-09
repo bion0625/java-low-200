@@ -18,7 +18,6 @@ public class FormatUtil {
             str = sdf.format(date);
         } catch (Exception e) {
             System.out.println(String.format("date >>>> %s", date));
-            e.printStackTrace();
         }
         return str;
     }
@@ -30,7 +29,6 @@ public class FormatUtil {
             date = sdf.parse(str);
         } catch (Exception e) {
             System.out.println(String.format("str >>>> %s", str));
-            e.printStackTrace();
         }
         return date;
     }
@@ -42,7 +40,6 @@ public class FormatUtil {
             result = Long.parseLong(str);
         } catch (Exception e) {
             System.out.println(String.format("str >>>> %s", str));
-            e.printStackTrace();
         }
         return result;
     }
