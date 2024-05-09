@@ -1,6 +1,7 @@
 package mySample.stock1.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import mySample.stock1.Info;
 import mySample.stock1.model.Price;
@@ -18,8 +19,8 @@ public class TreeDayPriceService {
         List<Stock> stocks = info.getCompanyInfo();
 
         for (Stock stock : stocks) {
-            List<Price> prices = info.getPriceInfo(stock.getCode(), 1);
-            // 10일 중 신고가
+            List<Price> prices = info.getPriceInfoByPage(stock.getCode(), 1, 10);
+            // 100일 중 신고가
             Price checkPrice = prices.stream().reduce((p, c) -> p.getHigh() > c.getHigh() ? p : c).orElse(null);
             if(prices.get(0).getHigh() == checkPrice.getHigh()) {
                 stock.setPrices(prices.subList(0, 3));
@@ -29,13 +30,15 @@ public class TreeDayPriceService {
             System.out.println(String.format("%d/%d", stocks.indexOf(stock), stocks.size()));
         }
 
-        stocks = stocks.stream().filter(s -> {
+        stocks = stocks.stream()
+        .filter(s -> {
             return s.getPrices() != null
             && s.getPrices().get(0).getHigh() > s.getPrices().get(1).getHigh()
             && s.getPrices().get(1).getHigh() > s.getPrices().get(2).getHigh()
             && s.getPrices().get(0).getLow() > s.getPrices().get(1).getLow()
             && s.getPrices().get(1).getLow() > s.getPrices().get(2).getLow();
-        }).toList();
+        })
+        .collect(Collectors.toList());
 
         for (Stock stock : stocks) {
             System.out.println(stock.getName());

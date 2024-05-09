@@ -18,7 +18,11 @@ public class Info {
         Info info = new Info();
         System.out.println(info.getCompanyInfo());
         // TODO 마지막 페이지 오류: 추후 수정
-        System.out.println(info.getPriceInfo("439250", 37));
+        List<Price> prices = info.getPriceInfoByPage("439250", 1, 3);
+        for (Price price : prices) {
+            FormatUtil formatUtil = new FormatUtil();
+            System.out.println(formatUtil.dateToString(price.getDate()));
+        }
         info.getPriceTotalPage("439250");
     }
 
@@ -44,6 +48,14 @@ public class Info {
 
         return stocks;
     }
+
+    public List<Price> getPriceInfoByPage(String code, int from, int to) {
+        List<Price> prices = new ArrayList<>();
+        for (int page = from; page <= to; page++) {
+            prices.addAll(getPriceInfo(code, page));
+        }
+        return prices;
+    } 
 
     public List<Price> getPriceInfo(String code, int page) { // 종목 및 페이지로 가격 정보 가져오기
         Document doc = null;
