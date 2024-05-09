@@ -22,8 +22,14 @@ public class TreeDayPriceService {
             List<Price> prices = info.getPriceInfoByPage(stock.getCode(), 1, 10);
             // 100일 중 신고가
             Price checkPrice = prices.stream().reduce((p, c) -> p.getHigh() > c.getHigh() ? p : c).orElse(null);
-            if(prices.get(0).getHigh() == checkPrice.getHigh()) {
+            if(checkPrice != null && prices.get(0).getHigh() == checkPrice.getHigh()) {
                 stock.setPrices(prices.subList(0, 3));
+            }
+
+            // 최근 3일 중 오늘이 최고 거래량이면 제외
+            checkPrice = stock.getPrices().stream().reduce((p, c) -> p.getVolume() > c.getVolume() ? p : c).orElse(null);
+            if (checkPrice != null && stock.getPrices().get(0).getVolume() == checkPrice.getVolume()) {
+                stock.setPrices(null);
             }
 
             // 로그
