@@ -43,7 +43,11 @@ public class Info {
             Elements info = infoList.get(i).select("td");
             System.out.println(info.get(0).text()); // 날짜
             System.out.println(info.get(1).text()); // 종가
-            System.out.println(info.get(2).text().replaceAll("상승","").replaceAll("하락","").replaceAll("보합","").trim()); // 전일비
+            System.out.println(info.get(2).text()
+                .replaceAll("상승","")
+                .replaceAll("하락","")
+                .replaceAll("보합","")
+                .trim()); // 전일비
             System.out.println(info.get(3).text()); // 시가
             System.out.println(info.get(4).text()); // 고가
             System.out.println(info.get(5).text()); // 저가
