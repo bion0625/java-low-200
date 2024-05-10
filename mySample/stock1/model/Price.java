@@ -30,6 +30,10 @@ public class Price {
     public Date getDate() {
         return this.date;
     }
+    public String getDateString() {
+        FormatUtil formatUtil = new FormatUtil();
+        return formatUtil.dateToString(this.date);
+    }
     public void setClose(long close) {
         this.close = close;
     }

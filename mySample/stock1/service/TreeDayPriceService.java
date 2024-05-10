@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import mySample.stock1.Info;
 import mySample.stock1.model.Price;
 import mySample.stock1.model.Stock;
-import mySample.stock1.util.FormatUtil;
 
 /*
  * 1) 3일 연달아 가격 상승이 아니면 제외
@@ -17,10 +16,16 @@ import mySample.stock1.util.FormatUtil;
 public class TreeDayPriceService {
     public static void main(String[] args) {
         TreeDayPriceService service = new TreeDayPriceService();
-        service.start();
+        for (Stock stock : service.start()) {
+            System.out.println(
+                String.format("%s\n\t%s", 
+                stock.getName(), 
+                stock.getPrices().get(0).getDateString())
+            );
+        }
     }
 
-    public void start() {
+    public List<Stock> start() {
         // 신고가 개월 수 (페이지 계산식 항)
         // int MONTH = 6;
         /*
@@ -76,12 +81,6 @@ public class TreeDayPriceService {
         }
 
         // 가격 정보가 있는 객체만 남긴다.
-        stocks = stocks.stream().filter(s -> s.getPrices() != null).collect(Collectors.toList());
-
-        for (Stock stock : stocks) {
-            FormatUtil formatUtil = new FormatUtil();
-            System.out.println(String.format("%s\n\t%s", 
-                stock.getName(), formatUtil.dateToString(stock.getPrices().get(0).getDate())));
-        }                   
+        return stocks.stream().filter(s -> s.getPrices() != null).collect(Collectors.toList());
     }
 }

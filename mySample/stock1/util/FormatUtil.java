@@ -26,7 +26,7 @@ public class FormatUtil {
         Date date = null;
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-            date = str == "" ? null : sdf.parse(str);
+            date = str.equals("") ? null : sdf.parse(str);
         } catch (Exception e) {
             System.out.println(String.format("stringToDate : str >>>> %s", str));
         }
@@ -35,7 +35,7 @@ public class FormatUtil {
 
     public long stringToLong(String str) {
         long result = 0L;
-        str = str == "" ? "0" : str;
+        str = str.equals("") ? "0" : str;
         try {
             str = str.replaceAll(",", "");
             result = Long.parseLong(str);
