@@ -13,7 +13,7 @@ public class IOService {
         System.out.println(ioService.getByText("test"));
     }
 
-    public void saveByText(String fileName, String savingPassword) {
+    public void saveByText(String fileName, String text) {
         try(
             PrintWriter pw = new PrintWriter(
                 new FileWriter(
@@ -21,7 +21,7 @@ public class IOService {
                 ), true
             )
         ){
-            pw.print(savingPassword);
+            pw.print(text);
         }catch(IOException e){
             e.printStackTrace();
         }
