@@ -42,9 +42,19 @@ public class TreeDayPriceService {
         Info info = new Info();
         List<Stock> stocks = info.getCompanyInfo();
 
+        // 로그시작
+        System.out.println();
+        int percent = 0;
+
         for (Stock stock : stocks) {
+
+            int cnt = stocks.indexOf(stock)+1;
+
             // 로그
-            System.out.println(String.format("%d\t/\t%d", stocks.indexOf(stock)+1, stocks.size()));
+            if ((cnt * 100) / stocks.size() > percent) {
+                percent = (cnt * 100) / stocks.size();
+                System.out.println(String.format("%d", percent) + "%");
+            }
 
             // 부하를 방지하기 위해 일단 1페이지만 확인 후 신고가 설정할 때 다시 구하기
             List<Price> prices = info.getPriceInfo(stock.getCode(), 1);
