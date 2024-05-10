@@ -8,9 +8,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import mySample.stock1.service.GetStockAndSendService;
+import mySample.stock1.service.SendMailService;
 
 public class TimerController {
     GetStockAndSendService getStockAndSendService = new GetStockAndSendService();
+    SendMailService sendMailService = new SendMailService();
 
     public void stockTimer() {
         Timer t = new Timer();
@@ -21,6 +23,7 @@ public class TimerController {
                 LocalDateTime now = LocalDateTime.now();
                 if (actTimes.contains(now.getHour())) {
                     System.out.println(String.format("this time is %d", now.getHour()));
+                    // sendMailService.mainInfoSetting(); // 메일 세팅 정보 (처음에만 한 번)
                     getStockAndSendService.start();
                     System.out.println(String.format("next time is %d", actTimes.get(actTimes.indexOf(now.getHour()) + 1)));
                 }

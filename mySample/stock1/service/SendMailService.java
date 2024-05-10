@@ -11,14 +11,13 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import mySample.stock.SendMail;
-
 public class SendMailService {
     public static void main(String[] args) throws Exception {
-        SendMail sendMail = new SendMail();
-        sendMail.sendMailByGoogle(
-            "보내는 메일 주소", "비밀번호", "받는 메일 주소", "test 제목", "테스트 내용"
-        );
+        SendMailService sendMailService = new SendMailService();
+        // sendMailService.sendMailByGoogle(
+        //     "보내는 메일 주소", "비밀번호", "받는 메일 주소", "test 제목", "테스트 내용"
+        // );
+        sendMailService.mainInfoSetting();
     }
 
     public void mainInfoSetting() {
