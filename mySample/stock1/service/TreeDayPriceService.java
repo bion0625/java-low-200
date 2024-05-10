@@ -22,7 +22,7 @@ public class TreeDayPriceService {
 
     public void start() {
         // 신고가 개월 수 (페이지 계산식 항)
-        int MONTH = 3;
+        // int MONTH = 6;
         /*
          * 13 페이지 6개월
          * 1페이지 10일 (2주)
@@ -31,7 +31,8 @@ public class TreeDayPriceService {
          * 6페이지 3개월
          * ..
         */
-        int SEARCH_PAGE = 2 * MONTH;
+        // int SEARCH_PAGE = 2 * MONTH;
+        int SEARCH_PAGE = 13; // 6개월
 
         Info info = new Info();
         List<Stock> stocks = info.getCompanyInfo();
