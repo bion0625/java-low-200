@@ -25,7 +25,9 @@ public class TimerController {
                     System.out.println(String.format("this time is %d", now.getHour()));
                     // sendMailService.mainInfoSetting(); // 메일 세팅 정보 (처음에만 한 번)
                     getStockAndSendService.start();
-                    System.out.println(String.format("next time is %d", actTimes.get(actTimes.indexOf(now.getHour()) + 1)));
+                    if (actTimes.indexOf(now.getHour()) == actTimes.size() - 1) {
+                        System.out.println(String.format("next time is %d", actTimes.get(0)));
+                    } else System.out.println(String.format("next time is %d", actTimes.get(actTimes.indexOf(now.getHour()) + 1)));
                 }
             }
         };
