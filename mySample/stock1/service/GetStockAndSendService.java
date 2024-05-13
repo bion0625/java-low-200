@@ -1,5 +1,6 @@
 package mySample.stock1.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import mySample.stock1.model.Stock;
@@ -27,7 +28,7 @@ public class GetStockAndSendService {
             from, 
             to, 
             password, 
-            stocks.get(0).getPrices().get(0).getDateString(), 
+            LocalDateTime.now().toString(), 
             sendText
         );
     }

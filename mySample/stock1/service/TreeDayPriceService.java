@@ -68,7 +68,7 @@ public class TreeDayPriceService {
 
             // 마지막일 diff가 5% ~ 15% 내에 있지 않으면 제외
             double diffPercent = (double) (prices.get(lastdayIndex).getDiff() * 100) / (double) prices.get(lastdayIndex + 1).getClose();
-            if (diffPercent < 5 || diffPercent > 15) continue;
+            if (prices.get(lastdayIndex).getDiff() > 0 && diffPercent < 5 || diffPercent > 15) continue;
 
              // 부하를 방지하기 위해 신고가 설정할 때 다시 구하기
             prices = info.getPriceInfoByPage(stock.getCode(), 1, SEARCH_PAGE);
