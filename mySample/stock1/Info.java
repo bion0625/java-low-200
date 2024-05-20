@@ -82,6 +82,12 @@ public class Info {
             FormatUtil formatUtil = new FormatUtil();
             price.setDate(formatUtil.stringToDate(info.get(0).text()));
             price.setClose(formatUtil.stringToLong(info.get(1).text()));
+            price.setOpen(formatUtil.stringToLong(info.get(3).text()));
+            price.setHigh(formatUtil.stringToLong(info.get(4).text()));
+            price.setLow(formatUtil.stringToLong(info.get(5).text()));
+            price.setVolume(formatUtil.stringToLong(info.get(6).text()));
+
+            Boolean minusDiffFlag = info.get(2).text().contains("하한가") || info.get(2).text().contains("하락");
             price.setDiff(formatUtil.stringToLong(info.get(2).text()
                                     .replaceAll("상한가","")
                                     .replaceAll("하한가","")
@@ -89,10 +95,9 @@ public class Info {
                                     .replaceAll("하락","")
                                     .replaceAll("보합","")
                                     .trim()));
-            price.setOpen(formatUtil.stringToLong(info.get(3).text()));
-            price.setHigh(formatUtil.stringToLong(info.get(4).text()));
-            price.setLow(formatUtil.stringToLong(info.get(5).text()));
-            price.setVolume(formatUtil.stringToLong(info.get(6).text()));
+            if (minusDiffFlag) {
+                price.setDiff(price.getDiff() * -1);
+            }
 
             prices.add(price);
         }
