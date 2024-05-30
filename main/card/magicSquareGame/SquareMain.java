@@ -11,7 +11,7 @@ public class SquareMain {
             magic = new OddMagicSquare3(n); // 다형성 - 부모 타입으로 자식을 생성할 수 있다.
         } else if (n>2 && n%4 == 0) {
             magic = new FourMagicSquare2(n); // 다형성 - 부모 타입으로 자식을 생성할 수 있다.
-        } else if:  (n>2 && n%4 == 2) {
+        } else if (n>2 && n%4 == 2) {
             magic = new SixMagicSquare2(n); // 다형성 - 부모 타입으로 자식을 생성할 수 있다.
         } else {
             System.out.println("만들 수 없는 마방진입니다.");
