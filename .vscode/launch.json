@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "SquareMain2",
+            "request": "launch",
+            "mainClass": "main.card.magicSquareGame.SquareMain2",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "vmArgs": [
+                "-Xmx2G",
+                "-Xms512M"
+            ]
+        }
+    ]
+}
