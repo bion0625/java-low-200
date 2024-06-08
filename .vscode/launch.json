@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Java200Math",
+            "request": "launch",
+            "mainClass": "main.base.Java200Math",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "SilverStar",
             "request": "launch",
             "mainClass": "main.base.SilverStar",
