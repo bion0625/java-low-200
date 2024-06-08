@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Smith",
+            "request": "launch",
+            "mainClass": "main.base.Smith",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "RestDay2",
             "request": "launch",
             "mainClass": "main.base.RestDay2",
