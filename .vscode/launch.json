@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SilverStar",
+            "request": "launch",
+            "mainClass": "main.base.SilverStar",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "StarPoint",
             "request": "launch",
             "mainClass": "main.base.StarPoint",
