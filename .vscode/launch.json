@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AntQuiz",
+            "request": "launch",
+            "mainClass": "main.base.AntQuiz",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "MoneyDeposit",
             "request": "launch",
             "mainClass": "main.base.MoneyDeposit",
