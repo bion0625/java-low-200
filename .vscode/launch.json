@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "StarPoint",
+            "request": "launch",
+            "mainClass": "main.base.StarPoint",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "SquareMain3",
             "request": "launch",
             "mainClass": "main.card.magicSquareGame.SquareMain3",
