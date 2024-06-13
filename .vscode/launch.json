@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "AboutFiles",
+            "request": "launch",
+            "mainClass": "main.file.AboutFiles",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
+            "name": "RestDay2",
+            "request": "launch",
+            "mainClass": "main.calendar.RestDay2",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "JAPICalendarMain",
             "request": "launch",
             "mainClass": "main.calendar.JAPICalendarMain",

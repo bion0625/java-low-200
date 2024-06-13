@@ -2,6 +2,7 @@ package main.calendar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 // s075 RestDay 추가
 public class RestDay2 {
     // 토, 일요일인가?
@@ -18,6 +19,11 @@ public class RestDay2 {
     public static String toYND(Calendar dd) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(dd.getTime());
+    }
+
+    public static String toStrDate(Date date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        return sdf.format(date);
     }
 
     public static void main(String[] args) {
