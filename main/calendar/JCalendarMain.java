@@ -1,4 +1,4 @@
-package main.base;
+package main.calendar;
 
 public class JCalendarMain {
     public static void main(String[] args) {

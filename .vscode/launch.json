@@ -4,6 +4,20 @@
             "type": "java",
             "name": "JCalendarMain",
             "request": "launch",
+            "mainClass": "main.calendar.JCalendarMain",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
+            "name": "CalendarTest",
+            "request": "launch",
+            "mainClass": "main.calendar.CalendarTest",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
+            "name": "JCalendarMain",
+            "request": "launch",
             "mainClass": "main.base.JCalendarMain",
             "projectName": "java-low-200_6203b7db"
         },
