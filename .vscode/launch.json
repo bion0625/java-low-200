@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "JCalendarMain",
+            "request": "launch",
+            "mainClass": "main.base.JCalendarMain",
+            "projectName": "java-low-200_6203b7db"
+        },
+        {
+            "type": "java",
             "name": "Smith",
             "request": "launch",
             "mainClass": "main.base.Smith",
