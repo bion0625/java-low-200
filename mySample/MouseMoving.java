@@ -71,3 +71,16 @@ public class MouseMoving {
         mouseLocation(180000); // 3초
     }
 }
+
+/**
+ * jar 파일 말기 및 실행
+ * 
+ * 1. 컴파일
+ * javac -encoding UTF-8 .\mySample\MouseMoving.java
+ * 
+ * 2. jar 생성
+ * jar cfe MouseMoving.jar mySample.MouseMoving mySample/*.class
+ * 
+ * 3. jar 실행
+ * java -jar MouseMoving.jar
+*/
